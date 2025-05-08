@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let firstCard, secondCard;
     let lockBoard = false;
     let matchedPairs = 0;
-    const totalPairs = 14; // For a 2x7 grid (14 cards)
+    const totalPairs = 12; // For a 2x6 grid (14 cards)
 
     function initializeGame() {
         // Reset game state

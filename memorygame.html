@@ -26,23 +26,20 @@
                 <a href="home.html" class="sidebar-link">
                     <i class="fa-solid fa-house"></i> Home
                 </a>
-                <a href="write.html" class="sidebar-link">
+                <a href="write.html" class="sidebar-link" id="write-button">
                     <i class="fa-solid fa-pen-nib"></i> Write
                 </a>
-                <a href="talk.html" class="sidebar-link">
+                <a href="talk.html" class="sidebar-link" id="talk-button">
                     <i class="fa-solid fa-comments"></i> Talk
                 </a>
-                <a href="listen.html" class="sidebar-link">
+                <a href="listen.html" class="sidebar-link" id="listen-button">
                     <i class="fa-solid fa-volume-high"></i> Listen
                 </a>
-                <a href="flashcards.html" class="sidebar-link">
+                <a href="flashcards.html" class="sidebar-link" id="flashcards-button">
                     <i class="fa-solid fa-layer-group"></i> Flashcards
                 </a>
-                <a href="resources.html" class="sidebar-link">
+                <a href="resources.html" class="sidebar-link" id="resources-button">
                     <i class="fa-solid fa-globe"></i> Resources
-                </a>
-                <a href="memorygame.html" class="sidebar-link active">
-                    <i class="fa-solid fa-gamepad"></i> Memory Game
                 </a>
             </div>
             <div class="sidebar-section">
@@ -53,7 +50,40 @@
             </div>
         </div>
     </div>
-
+    <!-- Settings Sidebar (Right) -->
+    <div id="settings-sidebar" class="sidebar settings-sidebar">
+        <div class="sidebar-header">
+            <button id="close-settings" class="close-btn">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <h3>Settings</h3>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4>User</h4>
+                <div id="username-display"></div>
+            </div>
+            <div class="sidebar-section">
+                <h4>Theme</h4>
+                <button id="lightmode-button" class="theme-button">
+                    <i class="fa-solid fa-sun"></i> Light Mode
+                </button>
+                <button id="darkmode-button" class="theme-button">
+                    <i class="fa-solid fa-moon"></i> Dark Mode
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <h4 id="level-header">Level <i class="fa-solid fa-child"></i> </h4>
+                <button id="easymode-button" class="theme-button">
+                    <i class="fa-solid fa-child"></i> Beginner
+                </button>
+                <button id="hardmode-button" class="theme-button">
+                    <i class="fa-solid fa-user-graduate"></i> Expert
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <div id="overlay"></div>
 
     <nav id="upper-menu">
