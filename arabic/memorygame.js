@@ -9,15 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
             { front: "اللغة", back: "Language", pronunciation: "al-lugha" },
             { front: "المجتمع", back: "Society", pronunciation: "al-mujtama" },
             { front: "الحرية", back: "Freedom", pronunciation: "al-hurriya" },
-            { front: "العدالة", back: "Justice", pronunciation: "al-'adala" },
+            { front: "العدالة", back: "Justice", pronunciation: "al-‘adala" },
             { front: "التاريخ", back: "History", pronunciation: "at-taarikh" },
             { front: "الفلسفة", back: "Philosophy", pronunciation: "al-falsafa" },
             { front: "الطب", back: "Medicine", pronunciation: "at-tibb" },
-            { front: "العلوم", back: "Sciences", pronunciation: "al-'uloom" },
+            { front: "العلوم", back: "Sciences", pronunciation: "al-‘uloom" },
             { front: "الرياضيات", back: "Mathematics", pronunciation: "ar-riyaadiyaat" },
             { front: "الطبخ", back: "Cooking", pronunciation: "at-tabkh" },
             { front: "الرياضة", back: "Sports", pronunciation: "ar-riyaada" },
-            { front: "العمل", back: "Work", pronunciation: "al-'amal" },
+            { front: "العمل", back: "Work", pronunciation: "al-‘amal" },
             { front: "الصحة", back: "Health", pronunciation: "as-sihha" },
             { front: "الأسرة", back: "Family", pronunciation: "al-usra" },
             { front: "النجاح", back: "Success", pronunciation: "an-najah" },
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let firstCard, secondCard;
     let lockBoard = false;
     let matchedPairs = 0;
-    const totalPairs = 12; // For a 2x6 grid (14 cards)
+    const totalPairs = 12; // For a 2x6 grid (12 cards)
 
     function initializeGame() {
         // Reset game state
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gridContainer.innerHTML = '';
 
         // Create a deck of cards
-        const selectedCards = flashcardsData.advanced.slice(0, totalPairs / 2); // Select 8 unique cards
+        const selectedCards = flashcardsData.advanced.slice(0, totalPairs / 2); // Select 6 unique cards
         const doubleCards = [...selectedCards, ...selectedCards]; // Duplicate for pairs
         
         // Shuffle the cards
@@ -65,18 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const cardBack = document.createElement('div');
             cardBack.classList.add('card-back');
-            
-            // Show both Arabic and English
+
+            // Show both Arabic and English with Romanization
             const arabicText = document.createElement('div');
             arabicText.classList.add('arabic');
-            arabicText.textContent = card.front;
-            
+            arabicText.textContent = card.front; // Arabic text
+
             const englishText = document.createElement('div');
             englishText.classList.add('english');
-            englishText.textContent = card.back;
-            
+            englishText.textContent = card.back; // English text
+
+            const romanizationText = document.createElement('div');
+            romanizationText.classList.add('romanization');
+            romanizationText.textContent = card.pronunciation; // Romanization text
+
+            // Append all texts to card back
             cardBack.appendChild(arabicText);
             cardBack.appendChild(englishText);
+            cardBack.appendChild(romanizationText); // Add romanization to card back
 
             // Append front and back to inner card
             cardInner.appendChild(cardFront);

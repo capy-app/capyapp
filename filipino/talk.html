@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Capyapp - Talk to Capy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Lalezar&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d72ffe18de.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="bard.js" defer></script>
+    <script src="sidebar.js" defer></script>
+</head>
+<body>
+    <div id="sidebar-menu" class="sidebar">
+        <div class="sidebar-header">
+            <button id="close-sidebar" class="close-btn">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <h3>Menu</h3>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4>Activities</h4>
+                <a href="home.html" class="sidebar-link" id="home-button">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="write.html" class="sidebar-link" id="write-button">
+                    <i class="fa-solid fa-pen-nib"></i> Write
+                </a>
+                <a href="talk.html" class="sidebar-link" id="talk-button">
+                    <i class="fa-solid fa-comments"></i> Talk
+                </a>
+                <a href="listen.html" class="sidebar-link" id="listen-button">
+                    <i class="fa-solid fa-volume-high"></i> Listen
+                </a>
+                <a href="flashcards.html" class="sidebar-link" id="flashcards-button">
+                    <i class="fa-solid fa-layer-group"></i> Flashcards
+                </a>
+                <a href="resources.html" class="sidebar-link" id="resources-button">
+                    <i class="fa-solid fa-globe"></i> Resources
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <h4>Misc.</h4>
+                <a href="credits.html" class="sidebar-link">
+                    <i class="fa-solid fa-info-circle"></i> Credits
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Settings Sidebar (Right) -->
+    <div id="settings-sidebar" class="sidebar settings-sidebar">
+        <div class="sidebar-header">
+            <button id="close-settings" class="close-btn">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <h3>Settings</h3>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4>User</h4>
+                <div id="username-display"></div>
+            </div>
+            <div class="sidebar-section">
+                <h4>Theme</h4>
+                <button id="lightmode-button" class="theme-button">
+                    <i class="fa-solid fa-sun"></i> Light Mode
+                </button>
+                <button id="darkmode-button" class="theme-button">
+                    <i class="fa-solid fa-moon"></i> Dark Mode
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <h4 id="level-header">Level <i class="fa-solid fa-child"></i> </h4>
+                <button id="easymode-button" class="theme-button">
+                    <i class="fa-solid fa-child"></i> Beginner
+                </button>
+                <button id="hardmode-button" class="theme-button">
+                    <i class="fa-solid fa-user-graduate"></i> Expert
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay for when sidebar is open -->
+    <div id="overlay"></div>
+    
+    <nav id="upper-menu">
+        <button id="menu-button" type="button" aria-label="Open Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="page-title">Talk</div>
+        <button id="settings-button" type="button" aria-label="Open Settings">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+    </nav>
+    
+    <div id="main-section">
+        <img src="assets/capy-ar.png" alt="Capybara" id="capybara">
+        <div class="response-display">
+            <div class="chat-bubble">
+                <p>مرحباً! I'm Capy, your Arabic learning companion. How can I help you today?</p>
+            </div>
+        </div>
+        
+        <div class="textbox-area">
+            <input type="text" class="textbox" placeholder="Type your message here..." aria-label="Message input">
+            <button class="textbox-buttons" id="send-button" type="button" aria-label="Send Message">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            <button class="textbox-buttons" id="mic-button" type="button" aria-label="Voice Input">
+                <i class="fa-solid fa-microphone"></i> <!-- Default icon -->
+            </button>
+        </div>
+    </div>
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+        const micButton = document.getElementById('mic-button');
+        let listeningTimeout; // Variable to hold the timeout reference
+        let recognition; // Variable for speech recognition
+
+        // Check if the browser supports speech recognition
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition(); // Create a new instance of SpeechRecognition
+            recognition.continuous = false; // Stop automatically after a single recognition
+            recognition.interimResults = false; // Do not return interim results
+            recognition.lang = 'en-US'; // Set language to English (United States)
+
+            recognition.onstart = function() {
+                console.log("Speech recognition started.");
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript; // Get the recognized text
+                console.log("Recognized text:", transcript); // Log the recognized text
+                // You can display the recognized text in your application
+                const textInput = document.querySelector('.textbox'); // Assuming you have a textbox to display the result
+                textInput.value = transcript; // Set the recognized text to the input field
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Speech recognition error:", event.error); // Log any errors
+            };
+
+            recognition.onend = function() {
+                console.log("Speech recognition ended.");
+                micButton.classList.remove('listening'); // Remove the 'listening' class
+                micButton.innerHTML = '<i class="fa-solid fa-microphone"></i>'; // Change icon back to normal
+            };
+        } else {
+            console.error("Speech recognition not supported in this browser.");
+            return; // Exit if not supported
+        }
+
+        micButton.addEventListener('click', function() {
+            if (micButton.classList.contains('listening')) {
+                // If already listening, stop recognition
+                micButton.classList.remove('listening'); // Remove the 'listening' class
+                micButton.innerHTML = '<i class="fa-solid fa-microphone"></i>'; // Change icon back to normal
+                clearTimeout(listeningTimeout); // Clear the timeout if manually turned off
+                recognition.stop(); // Stop recognition
+            } else {
+                // If not listening, start recognition
+                micButton.classList.add('listening'); // Add the 'listening' class
+                micButton.innerHTML = '<i class="fa-solid fa-ellipsis"></i>'; // Change icon to indicate listening
+                
+                // Start speech recognition
+                recognition.start();
+
+                // Set a timeout to automatically turn off the mic after 30 seconds
+                listeningTimeout = setTimeout(() => {
+                    recognition.stop(); // Stop recognition after 30 seconds
+                    console.log("Mic turned off automatically after 30 seconds."); // Log the action
+                }, 30000); // 30 seconds
+            }
+        });
+    });
+    </script>
+</body>
+</html>

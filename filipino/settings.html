@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Capyapp - Choose Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Lalezar&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <nav id="upper-menu">
+        <div class="page-title">Choose Your Settings</div>
+    </nav>
+    <div id="main-section" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="form-container" style="width: 400px;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Settings</h5>
+                <form id="settings-form">
+                    <div class="mb-3">
+                        <label for="theme" class="form-label">Select Theme</label>
+                        <select class="form-select" id="theme" required>
+                            <option value="light">Light Mode</option>
+                            <option value="dark">Dark Mode</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="level" class="form-label">Select Level</label>
+                        <select class="form-select" id="level" required>
+                            <option value="beginner">Beginner</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-primary w-100">Save Settings</button>
+                    </div>
+                </form>
+                <div id="error-message" class="text-danger text-center mt-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Helper functions for users in localStorage
+function getUsers() {
+    const usersJSON = localStorage.getItem('users');
+    if (!usersJSON) return [];
+    try {
+        return JSON.parse(usersJSON);
+    } catch {
+        return [];
+    }
+}
+
+function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+// Get current logged in user from sessionStorage - removed the extra space!
+const loggedInUsername = sessionStorage.getItem('loggedInUser');
+if (!loggedInUsername) {
+    // No logged user, redirect to login page
+    window.location.href = 'login.html';
+}
+
+// Pre-populate form with user's current settings
+function loadUserSettings() {
+    if (!loggedInUsername) return;
+    
+    const users = getUsers();
+    const user = users.find(u => u.username === loggedInUsername);
+    
+    if (user?.settings) {
+        const themeSelect = document.getElementById('theme');
+        const levelSelect = document.getElementById('level');
+        
+        // Set theme dropdown value
+        if (user.settings.theme && themeSelect) {
+            themeSelect.value = user.settings.theme;
+        }
+        
+        // Set level dropdown value
+        if (user.settings.level && levelSelect) {
+            levelSelect.value = user.settings.level;
+        }
+    }
+}
+
+// Load settings when page loads
+document.addEventListener('DOMContentLoaded', loadUserSettings);
+
+document.getElementById('settings-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const theme = document.getElementById('theme').value;
+    const level = document.getElementById('level').value;
+
+    if (!loggedInUsername) {
+        showError('No logged in user found.');
+        return;
+    }
+
+    let users = getUsers();
+    const userIndex = users.findIndex(u => u.username === loggedInUsername);
+
+    if (userIndex === -1) {
+        showError('User not found.');
+        return;
+    }
+
+    // Save settings to user's data
+    users[userIndex].settings = {
+        theme: theme,
+        level: level
+    };
+
+    saveUsers(users);
+
+    // Save theme and level to localStorage for immediate use
+    localStorage.setItem('theme', theme);
+    localStorage.setItem('level', level);
+    
+    // Also update the mode setting to match level
+    localStorage.setItem('mode', level === 'expert' ? 'expert' : 'beginner');
+
+    // Apply theme immediately
+    document.body.classList.remove('light-mode', 'dark-mode');
+    document.body.classList.add(`${theme}-mode`);
+
+    // Redirect to appropriate home page based on level
+    window.location.href = level === 'expert' ? 'evilhome.html' : 'home.html';
+});
+
+function showError(message) {
+    const el = document.getElementById('error-message');
+    el.textContent = message;
+    setTimeout(() => { el.textContent = ''; }, 6000);
+}
+    </script>
+</body>
+</html>
