@@ -106,24 +106,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Also update the display area text size
+    // Update the display area text size to fit within the container
     function updateDisplayTextSize() {
         const characterDisplay = document.getElementById('character');
         const romanizationDisplay = document.getElementById('romanization');
+        const infoArea = document.getElementById('info-area');
+        
+        // Get info area width to determine maximum text size
+        const containerWidth = infoArea.clientWidth - 40; // Subtract padding
         
         // Adjust display text size based on word length
-        if (currentCharacter.length > 12) {
-            characterDisplay.style.fontSize = '2rem'; // Very small for very long words
-            romanizationDisplay.style.fontSize = '2rem';
+        if (currentCharacter.length > 15) {
+            characterDisplay.style.fontSize = '1.5rem'; // Extra small for very long words
+            romanizationDisplay.style.fontSize = '1.5rem';
+        } else if (currentCharacter.length > 12) {
+            characterDisplay.style.fontSize = '1.8rem'; // Very small for very long words
+            romanizationDisplay.style.fontSize = '1.8rem';
         } else if (currentCharacter.length > 8) {
-            characterDisplay.style.fontSize = '2.5rem'; // Smaller for long words
-            romanizationDisplay.style.fontSize = '2.5rem';
+            characterDisplay.style.fontSize = '2.2rem'; // Smaller for long words
+            romanizationDisplay.style.fontSize = '2.2rem';
         } else if (currentCharacter.length > 5) {
-            characterDisplay.style.fontSize = '3rem'; // Medium for medium-length words
-            romanizationDisplay.style.fontSize = '3rem';
+            characterDisplay.style.fontSize = '2.8rem'; // Medium for medium-length words
+            romanizationDisplay.style.fontSize = '2.8rem';
         } else {
             characterDisplay.style.fontSize = '3.5rem'; // Default size for short words
             romanizationDisplay.style.fontSize = '3.5rem';
         }
+        
+        // Additional check to ensure text fits in container
+        // Wait for browser to apply fontSize changes before measuring
+        setTimeout(() => {
+            const characterWidth = characterDisplay.scrollWidth;
+            const romanizationWidth = romanizationDisplay.scrollWidth;
+            const maxWidth = Math.max(characterWidth, romanizationWidth);
+            
+            // If text is still too wide, further reduce font size
+            if (maxWidth > containerWidth) {
+                const scaleFactor = containerWidth / maxWidth * 0.95; // 5% margin
+                const newCharSize = parseFloat(window.getComputedStyle(characterDisplay).fontSize) * scaleFactor;
+                const newRomSize = parseFloat(window.getComputedStyle(romanizationDisplay).fontSize) * scaleFactor;
+                
+                characterDisplay.style.fontSize = `${newCharSize}px`;
+                romanizationDisplay.style.fontSize = `${newRomSize}px`;
+            }
+        }, 0);
     }
 
     function adjustTraceTolerance() {
@@ -374,11 +400,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update text size for display area
         updateDisplayTextSize();
         
+        // Call it again after a short delay to ensure accurate measurements
+        setTimeout(updateDisplayTextSize, 50);
+        
         drawTemplateCharacter();
         userPath = [];
         strokeHistory = [];
         scoreSpan.textContent = score;
     }
+
 
     function clearCanvas() {
         ctx.fillStyle = 'white';
@@ -401,6 +431,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update text size when toggling display
         updateDisplayTextSize();
+        
+        // Call it again after a short delay to ensure accurate measurements
+        setTimeout(updateDisplayTextSize, 50);
     }
     
     // Map Arabic words to sound file names (relative URLs or paths)

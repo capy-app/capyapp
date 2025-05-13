@@ -27,36 +27,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let checkingInProgress = false; // Flag to prevent multiple checks at once
 
     // Updated character set to include Romanizations
-    const characters = [
-        { arabic: 'أ', romanization: 'Alif' },
-        { arabic: 'ب', romanization: 'Ba' },
-        { arabic: 'ت', romanization: 'Ta' },
-        { arabic: 'ث', romanization: 'Tha' },
-        { arabic: 'ج', romanization: 'Jim' },
-        { arabic: 'ح', romanization: 'Ha' },
-        { arabic: 'خ', romanization: 'Kha' },
-        { arabic: 'د', romanization: 'Dal' },
-        { arabic: 'ذ', romanization: 'Dhal' },
-        { arabic: 'ر', romanization: 'Ra' },
-        { arabic: 'ز', romanization: 'Zay' },
-        { arabic: 'س', romanization: 'Sin' },
-        { arabic: 'ش', romanization: 'Shin' },
-        { arabic: 'ص', romanization: 'Sad' },
-        { arabic: 'ض', romanization: 'Dad' },
-        { arabic: 'ط', romanization: 'Ta (emphatic)' },
-        { arabic: 'ظ', romanization: 'Dha (emphatic)' },
-        { arabic: 'ع', romanization: 'Ayn' },
-        { arabic: 'غ', romanization: 'Ghayn' },
-        { arabic: 'ف', romanization: 'Fa' },
-        { arabic: 'ق', romanization: 'Qaf' },
-        { arabic: 'ك', romanization: 'Kaf' },
-        { arabic: 'ل', romanization: 'Lam' },
-        { arabic: 'م', romanization: 'Mim' },
-        { arabic: 'ن', romanization: 'Nun' },
-        { arabic: 'ه', romanization: 'Ha (final)' },
-        { arabic: 'و', romanization: 'Waw' },
-        { arabic: 'ي', romanization: 'Ya' }
-    ];
+   const characters = [
+    { arabic: 'A', romanization: 'Ey' },
+    { arabic: 'B', romanization: 'Bi' },
+    { arabic: 'C', romanization: 'Si' },
+    { arabic: 'D', romanization: 'Di' },
+    { arabic: 'E', romanization: 'I' },
+    { arabic: 'F', romanization: 'Ef' },
+    { arabic: 'G', romanization: 'Dyí' },
+    { arabic: 'H', romanization: 'Eyt' },
+    { arabic: 'I', romanization: 'Ay' },
+    { arabic: 'J', romanization: 'Dyéy' },
+    { arabic: 'K', romanization: 'Key' },
+    { arabic: 'L', romanization: 'El' },
+    { arabic: 'M', romanization: 'Em' },
+    { arabic: 'N', romanization: 'En' },
+    { arabic: 'Ñ', romanization: 'Enye' },
+    { arabic: 'Ng', romanization: 'Endyi' },
+    { arabic: 'O', romanization: 'O' },
+    { arabic: 'P', romanization: 'Pi' },
+    { arabic: 'Q', romanization: 'Kyu' },
+    { arabic: 'R', romanization: 'Ar' },
+    { arabic: 'S', romanization: 'Es' },
+    { arabic: 'T', romanization: 'Ti' },
+    { arabic: 'U', romanization: 'Yu' },
+    { arabic: 'V', romanization: 'Vi' },
+    { arabic: 'W', romanization: 'Dobolyu' },
+    { arabic: 'X', romanization: 'Eks' },
+    { arabic: 'Y', romanization: 'Way' },
+    { arabic: 'Z', romanization: 'Zi' }
+];
 
     function drawTemplateCharacter() {
         ctx.save();

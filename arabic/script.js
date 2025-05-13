@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Check if the games button exists
         if (buttons.games) {
-            buttons.games.href = 'credits.html'; // No change for games
+            buttons.games.href = 'games.html'; // No change for games
             console.log("Games button link:", buttons.games.href);
         }
     }

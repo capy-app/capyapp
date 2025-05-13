@@ -77,16 +77,28 @@ body.transition {
     transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
+#main-sectionn {
+    flex: 1; /* Allow main section to grow and fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-image: url("assets/talkbackground.png"); /* Set the new background image */
+    background-size: cover; /* Ensure the background covers the entire section */
+    background-position: center; /* Center the background image */
+}
 #main-section {
     flex: 1; /* Allow main section to grow and fill available space */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    background-size: cover; /* Ensure the background covers the entire section */
+    background-position: center; /* Center the background image */
 }
 
 /* Background images for light and dark modes */
-body.light-mode #main-section {
+/* body.light-mode #main-section {
     background-image: url("assets/background-light.jpg");
     background-size: cover;
     background-position: center;
@@ -96,7 +108,7 @@ body.dark-mode #main-section {
     background-image: url("assets/background-dark.jpg");
     background-size: cover;
     background-position: center;
-}
+}*/
 
 /* Theme-specific variables for card background */
 body.light-mode {
@@ -444,12 +456,12 @@ body.dark-mode .textbox {
 }
 
 /* Talk page specific styles */
-#capybara {
-    max-width: 180px;
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-}
+    #capybara {
+        max-width: 300px;
+        margin-top: 250px;
+        transition: transform 0.3s ease;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    }
 
 #capybara:hover {
     transform: scale(1.05) rotate(5deg);
@@ -471,7 +483,15 @@ body.dark-mode .textbox {
     justify-content: center;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: 1px solid var(--clr-border);
+    position: absolute;
+    bottom: 10%;
 }
+
+#shuffle-button {
+    position: absolute;
+    top: 10%;
+}
+
 
 /* Writing Page Styles */
 #writing-area {
@@ -697,6 +717,11 @@ body.dark-mode .textbox {
     
     #main-section {
         padding: 40px;
+    }
+
+    #main-sectionn {
+        padding: 40px;
+        background-image: url("assets/talkbackground.png"); /* Set the new background image */
     }
     
     .response-display {
@@ -1646,4 +1671,8 @@ body.dark-mode .replay-btn {
 .romanization {
     font-size: 0.9rem; /* Smaller font size for romanization */
     color: #666; /* Lighter color for distinction */
+}
+
+.writepage-buttonss {
+    display: none;
 }

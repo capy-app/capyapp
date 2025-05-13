@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const API_KEY = "AIzaSyDYOdEfjsD0JT8FPYyqxGRA1V304E2y1U8";
     
     // Initial greeting
-    responseDisplay.textContent = "مرحباً! (Marhaban!) Would you like to learn some Arabic today?";
+    responseDisplay.textContent = "Kamusta! (How are you!) Would you like to learn some Filipino today?";
     
     sendButton.addEventListener('click', function() {
         sendMessageToGemini();
@@ -39,15 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     role: "user",
                     parts: [
                         {
-                            text: `Act as an Arabic language tutor named Capy. Keep your response under ${MAX_RESPONSE_LENGTH} characters.
+                            text: `Act as an Filipino language tutor named Capy. Keep your response under ${MAX_RESPONSE_LENGTH} characters.
                             
                             Guidelines:
-                            - Include at least one Arabic word/phrase with pronunciation and translation
-                            - Focus on beginner-friendly language learning
+                            - Include at least one Filipino word/phrase with translation
+                            - Focus on beginner or intermediate-friendly language learning
                             - Use positive reinforcement
-                            - Correct Arabic usage gently
-                            - Act like a capybara (eg. You live like a Capybara and enjoy things Capybaras like, but )
+                            - Correct Filipino usage gently
+                            - Act like a capybara (eg. You live like a Capybara and enjoy things Capybaras like)
                             - Avoid emojis
+                            - Codeswitch like a Filipino
                             - Remember the previous requests from this conversation
                             
                             User message: ${userMessage}`
@@ -118,3 +119,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+const capybaraImages = [
+    'assets/capyph.png',
+    'assets/capyar.png',
+    'assets/capygold.png',
+    'assets/capyrscarf.png',
+    'assets/capygscarf.png',
+    'assets/capybow.png',
+];
+
+function shuffleCapybara() {
+    const randomIndex = Math.floor(Math.random() * capybaraImages.length);
+    capybara.src = capybaraImages[randomIndex];
+}
+
+const shuffleButton = document.getElementById('shuffle-button');
+shuffleButton.addEventListener('click', shuffleCapybara);
+

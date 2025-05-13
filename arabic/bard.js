@@ -118,3 +118,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+const capybaraImages = [
+    'assets/capyph.png',
+    'assets/capyar.png',
+    'assets/capygold.png',
+    'assets/capyrscarf.png',
+    'assets/capygscarf.png',
+    'assets/capybow.png',
+];
+
+function shuffleCapybara() {
+    const randomIndex = Math.floor(Math.random() * capybaraImages.length);
+    capybara.src = capybaraImages[randomIndex];
+}
+
+const shuffleButton = document.getElementById('shuffle-button');
+shuffleButton.addEventListener('click', shuffleCapybara);
+
