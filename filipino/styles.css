@@ -285,6 +285,17 @@ html {
     transition: background-color 0.3s ease;
 }
 
+#upper-menu-lite {
+    display: flex;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: var(--clr-main);
+    width: 100%;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
 #upper-menu button, #upper-menu a {
     background: none;
     border: none;
