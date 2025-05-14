@@ -183,9 +183,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if the listen button exists
         if (buttons.listen) {
             if (isExpertMode) {
-                buttons.listen.href = 'evillisten.html';
+                buttons.listen.href = '#';
             } else {
-                buttons.listen.href = 'listen.html';
+                buttons.listen.href = '#';
             }
             console.log("Listen button link:", buttons.listen.href);
         }
