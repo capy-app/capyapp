@@ -1637,3 +1637,57 @@ body.dark-mode .replay-btn {
     color: #666; /* Lighter color for distinction */
 }
 
+
+/* General Styles for Games Page */
+.games-container {
+    background-color: var(--clr-card-bg); /* Use card background color */
+    border-radius: 15px; /* Rounded corners */
+    padding: 30px; /* Padding for the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    width: 90%; /* Responsive width */
+    max-width: 800px; /* Max width for larger screens */
+    margin: 20px auto; /* Center the container */
+}
+
+/* Header Styles */
+.games-header {
+    color: var(--clr-main); /* Main color for the header */
+    font-family: 'Lalezar', sans-serif; /* Font style */
+    font-size: 2.5rem; /* Font size */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+/* Game List Styles */
+.game-list {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Space between game items */
+}
+
+/* Individual Game Item Styles */
+.game-item {
+    color: var(--clr-text); /* Text color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding for game items */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition effects */
+}
+
+/* Hover Effect for Game Items */
+.game-item:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Game Title Styles */
+.game-item h4 {
+    margin: 0 0 10px; /* Margin below the title */
+    font-size: 1.5rem; /* Font size for titles */
+}
+
+/* Game Description Styles */
+.game-item p {
+    margin: 0; /* No margin for description */
+    margin-bottom: 10px;
+    font-size: 1rem; /* Font size for description */
+}
