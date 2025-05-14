@@ -98,11 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Display the response
                 responseDisplay.textContent = geminiResponse;
                 
-                // Change to Arabic capybara design when responding
-                if (capybaraImage) {
-                    capybaraImage.src = "assets/capy-ar.png";
-                }
-                
             } catch (error) {
                 console.error('Error extracting response:', error);
                 console.error('Response data:', data);
